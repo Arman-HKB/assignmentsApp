@@ -11,7 +11,7 @@ import { LoggingService } from './shared/logging.service';
 export class AppComponent {
   title = 'ASSIGNMENTS APP';
   hide = true;
-  logged = true;
+  logged = false;
   idUser!:string;
   passUser!:string;
   accounts = [
