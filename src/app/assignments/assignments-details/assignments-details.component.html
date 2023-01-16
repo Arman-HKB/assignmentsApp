@@ -1,0 +1,44 @@
+<div class="assignmentDetailCard">
+  <p class="display-6 mb-4">Modifier un assignment</p>
+  <mat-card *ngIf="assignmentTransmis" class="p-0">
+    <div class="row">
+      <div class="col-1">
+        <img src="../../assets/matieres/{{assignmentTransmis.matiere}}.jpg" class="img-fluid">
+      </div>
+      <div class="col-10">
+        <h5>{{assignmentTransmis.nom}}</h5>
+        <h6>À rendre pour le {{assignmentTransmis.dateDeRendu|date}}.</h6>
+      </div>
+      <div class="col-1">
+        <div class="photo">
+          <img src="../../assets/profs/{{assignmentTransmis.matiere}}-prof.jpeg" class="img-fluid">
+          Déposé par<br>{{assignmentTransmis.prof}}
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5">
+      <p class="mb-0">Remarques :</p>
+      <div *ngIf="assignmentTransmis.remarques; else pasDeRemarques" class="mb-0">
+        <div *ngFor="let r of assignmentTransmis.remarques">
+          <p class="mb-0">{{r}}</p>
+        </div>
+      </div>
+        <ng-template #pasDeRemarques>
+          <p class="mb-0" style="color: rgb(167, 167, 167);">Pas de remarques.</p>
+      </ng-template>
+    </div>
+    <hr>
+    <div id="bottom">
+      <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
+        Devoir rendu
+      </mat-checkbox>
+      <div class="w-100 d-flex justify-content-end" *ngIf="isTeacher()">
+        <nav><a routerLink="/assignment/{{assignmentTransmis.id}}/edit">
+          <button mat-stroked-button color="primary" type="submit" [disabled]="!isAdmin()">EDITER&ensp;<mat-icon>edit</mat-icon></button>
+         </a></nav>
+        <button mat-flat-button color="warn" class="ms-3 danger" (click)="onDelete()">SUPPRIMER&ensp;<mat-icon>delete_outline</mat-icon></button>
+      </div>
+    </div>
+  </mat-card>
+</div>

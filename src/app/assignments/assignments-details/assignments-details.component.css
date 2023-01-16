@@ -1,0 +1,22 @@
+#bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.right {
+    display: flex;
+    flex-direction: row!important;
+    align-self: flex-end!important;
+}
+.right button {
+    margin-left: 15px;
+}
+
+.assignmentDetailCard {
+    padding: 0px 15px 0px 15px;
+}
+
+mat-card {
+    background-color: transparent!important;
+    box-shadow: none!important;
+}

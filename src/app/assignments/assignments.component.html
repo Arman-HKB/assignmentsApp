@@ -1,0 +1,48 @@
+<main class="">
+  <div class="d-flex justify-content-between">
+    <p class="display-6 mb-4">Assignments à rendre <span style="font-size: medium;">(total : {{assignments.length}})</span></p>
+    <mat-form-field>
+      <mat-label>Rechercher</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Rechercher">
+    </mat-form-field>
+  </div>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2 w-100">
+    <ng-container matColumnDef="matiere">
+      <th mat-header-cell *matHeaderCellDef>Matiere</th>
+      <td mat-cell *matCellDef="let element" style="background-image: url('../../assets/matieres/{{element.matiere}}.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center;">
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="ps-3">Nom</th>
+      <td mat-cell *matCellDef="let element" class="ps-3">{{element.nom}}</td>
+    </ng-container>
+    <ng-container matColumnDef="dateDeRendu">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Date de rendu</th>
+      <td mat-cell *matCellDef="let element">{{element.dateDeRendu|date}}</td>
+    </ng-container>
+    <ng-container matColumnDef="rendu">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Rendu</th>
+      <td mat-cell *matCellDef="let element">
+        <p *ngIf="element.rendu; else nonsoumis" class="mb-0" style="color: #42b75b;">Rendu</p>
+        <ng-template #nonsoumis>
+          <p class="" class="mb-0" style="color: #b74242;">Non rendu</p>
+        </ng-template>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef>Détail</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-mini-fab class="primary" routerLink="/assignment/{{element.id}}">
+          <mat-icon>loupe</mat-icon>
+        </button>
+        <!--<button mat-mini-fab class="ms-2 danger" (click)="onDelete()">
+          <mat-icon>delete</mat-icon>
+        </button>-->
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true"></tr>
+    <tr mat-row *matRowDef="let element; let row; columns: columnsToDisplay;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10,20,50,100]" showFirstLastButtons>
+  </mat-paginator>
+</main>

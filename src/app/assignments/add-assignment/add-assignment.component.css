@@ -1,0 +1,17 @@
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 15px 0px 15px;
+}
+
+form button {
+  align-self: flex-end;
+}
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}

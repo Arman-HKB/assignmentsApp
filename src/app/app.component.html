@@ -1,0 +1,67 @@
+<div *ngIf="!logged" class="" id="pageDeConnexion">
+  <div id="leftConx"></div>
+  <div id="rightConx" class="d-flex align-items-center">
+    <form ngForm (submit)="login(); loginForm.reset()" #loginForm class="form" id="loginForm">
+      <p class="display-5">AssignmentsApp</p>
+      <mat-form-field class="">
+        <mat-label>Identifiant</mat-label>
+        <input matInput name="id" [(ngModel)]="idUser" required>
+      </mat-form-field>
+      <mat-form-field class="">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput name="pass" [(ngModel)]="passUser" required>
+      </mat-form-field>
+      <!--<mat-form-field>
+        <mat-label>Mot de passe</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="passUser" required>
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>-->
+      <button mat-raised-button color="primary" class="primary">
+        CONNEXION
+      </button>
+    </form>
+  </div>
+</div>
+<main *ngIf="logged" id="mainApp">
+  <mat-toolbar>
+    <button mat-icon-button class="sidebarToggle" (click)="drawer.toggle()">
+      <mat-icon>apps</mat-icon>
+    </button>
+    <a routerLink="/home">{{title}}</a>
+    <span class="mat-toolbar-spacer"></span>
+    <button mat-raised-button (click)="logout()" color="primary" class="logout">
+      DECONNEXION <mat-icon>exit_to_app</mat-icon>
+    </button>
+   <!--<mat-slide-toggle color="primary" (click)="login()">Login</mat-slide-toggle>-->
+  </mat-toolbar>
+  <mat-drawer-container class="" autosize>
+    <mat-drawer #drawer class="sidenav" mode="side" opened>
+        <mat-list role="" class="pt-0">
+          <mat-list-item routerLink="/home" role="" class="">
+            <mat-icon mat-list-icon>home</mat-icon>
+            <p class="ms-2 mb-0 me-5">ACCUEIL</p>
+          </mat-list-item>
+          <mat-list-item *ngIf="isTeacher()" routerLink="/add" role="" class="">
+            <mat-icon mat-list-icon>assignment</mat-icon>
+            <p class="ms-2 mb-0 me-5">AJOUTER</p>
+          </mat-list-item>
+        </mat-list>   
+    </mat-drawer>
+  
+    <div class="sidenav-content">
+      <div class="m-5"><router-outlet></router-outlet></div>
+      <footer class="container d-flex flex-wrap justify-content-between align-items-center py-3 mt-4" style="width: auto; left:0; right:0; position: fixed; bottom: 0;">
+        <p class="col-md-4 mb-0 text-muted">&copy; 2023 AssignmentsApp</p>
+    
+        <img src="../assets/favicon.png" style="width: 30px;">
+    
+        <ul class="nav col-md-4 justify-content-end">
+          <li class="nav-item"><a routerLink="/home" class="nav-link px-2 text-muted">Accueil</a></li>
+          <li class="nav-item"><a routerLink="/add" class="nav-link px-2 text-muted" *ngIf="isTeacher()">Ajouter</a></li>
+        </ul>
+      </footer>
+    </div>
+  </mat-drawer-container>
+</main>

@@ -1,0 +1,17 @@
+<div class="" *ngIf="assignment">
+ <p class="display-6 mb-4">Modifier un assignment</p>
+ <h6 class="">{{assignment.nom}}</h6>
+ <form ngForm class="form" #formupdate (submit)="onSaveAssignment(); formupdate.reset(); ">
+   <mat-form-field>
+     <input matInput placeholder="Modifier le nom" [(ngModel)]="nomAssignment" name="assignment-name">
+   </mat-form-field>
+   <mat-form-field>
+     <input matInput [matDatepicker]="picker" placeholder="Modifier la date" [(ngModel)]="dateDeRendu" name="date">
+     <mat-datepicker-toggle matSuffix [for]="picker">
+     </mat-datepicker-toggle>
+     <mat-datepicker #picker></mat-datepicker>
+   </mat-form-field>
+   
+   <button mat-raised-button color="primary" class="success" [disabled]="((!nomAssignment)||(!dateDeRendu))">Enregistrer</button>
+</form>
+</div>
